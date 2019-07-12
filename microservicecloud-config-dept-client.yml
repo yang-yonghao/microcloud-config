@@ -1,0 +1,70 @@
+spring: 
+  profiles: 
+    active: 
+    - dev
+---
+server:
+  port: 8001 #注册中心占用7001端口
+
+spring: 
+  profiles: dev
+  application: 
+    name: microservicecloud-config-dept-client
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/cloudDB01?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.springcloud.entity
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  
+eureka:
+  client: #客户端注册进Eureka服务列表内
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/ #和服务端提供的地址一致
+  instance:
+    instance-id: microcloud-config-dept8001 #自定义服务名称信息
+    prefer-ip-address: true #访问路径可以显示IP地址
+    
+info:
+  app.name: microcloud
+  company.name: www.hlhao.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+---
+server:
+  port: 8001 #注册中心占用7001端口
+
+spring: 
+  profiles: test
+  application: 
+    name: microservicecloud-config-dept-client
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/cloudDB02?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.springcloud.entity
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  
+eureka:
+  client: #客户端注册进Eureka服务列表内
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/ #和服务端提供的地址一致
+  instance:
+    instance-id: microcloud-config-dept8001 #自定义服务名称信息
+    prefer-ip-address: true #访问路径可以显示IP地址
+    
+info:
+  app.name: microcloud
+  company.name: www.hlhao.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
